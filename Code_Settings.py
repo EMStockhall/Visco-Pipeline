@@ -61,13 +61,14 @@ class pipeline_settings:
         self.FDCHM = 0.0005
         dotlowerBound = 0.000001
         self.lowerBound = np.ones((2*self.pronyTerms, 1))*dotlowerBound
+        self.lowerBound = self.lowerBound.flatten()
         upperBound1 = 0.999999
         upperBound2 = 10000000
         self.upperBound = np.ones((2*self.pronyTerms, 1))
         for i in range(self.pronyTerms):
             self.upperBound[i*2] = upperBound1
             self.upperBound[i*2 + 1] = upperBound2
-
+        self.upperBound = self.upperBound.flatten()
         self.scalingStrategy = "linear" # The scaling strategy to use, can be "linear" or "log"
 
 

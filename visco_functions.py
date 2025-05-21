@@ -295,8 +295,11 @@ def myEvaluate_dot(x, obj, g, param) -> None:
     '''
     This function is used to evaluate the objective function and constraints for the DOT optimisation
     '''
-    # Change x back into base 10 from log
-    x = np.power(10, x)
+    # Change params back into base 10 from log
+    if pf.scalingStrategy == 'log':
+        x = np.power(10, x)
+    if pf.scalingStrategy == 'linear':
+        x = np.multiply(x, pf.weights)
     time_before = time.time()
 
     home_direct = os.getcwd()
@@ -325,7 +328,10 @@ def myEvaluate_dot(x, obj, g, param) -> None:
         print("FEM simulation completed successfully")
     
     # Make x back into log space
-    x = np.log10(x)
+    if pf.scalingStrategy == 'log':
+        x = np.log10(x)
+    if pf.scalingStrategy == 'linear':
+        x = np.divide(x, pf.weights)
     
     print("Begining DOT iteration")
     print("Objective function value: ", obj.value)
