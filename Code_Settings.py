@@ -57,8 +57,8 @@ class pipeline_settings:
         self.optimiser_type = "MMFD"
         self.maxdotIterations = 300
         self.nCons = 1
-        self.FDCH = 0.001
-        self.FDCHM = 0.0001
+        self.FDCH = 0.005
+        self.FDCHM = 0.0005
         dotlowerBound = 0.000001
         self.lowerBound = np.ones((2*self.pronyTerms, 1))*dotlowerBound
         upperBound1 = 0.999999
@@ -68,12 +68,26 @@ class pipeline_settings:
             self.upperBound[i*2] = upperBound1
             self.upperBound[i*2 + 1] = upperBound2
 
+        self.scalingStrategy = "linear" # The scaling strategy to use, can be "linear" or "log"
+
+
         
         # Scaling the bounds and starting points to have values in the same order of magnitude
         # This is done to avoid numerical issues with the DOT algorithm
-        self.lowerBound = np.log10(self.lowerBound)
-        self.upperBound = np.log10(self.upperBound)
-        self.startingpoints = np.log10(self.startingpoints)
+
+        # Uncomment the next line to use the log10 of the bounds and starting points
+        if self.scalingStrategy == "log":
+            self.lowerBound = np.log10(self.lowerBound)
+            self.upperBound = np.log10(self.upperBound)
+            self.startingpoints = np.log10(self.startingpoints)
+
+        # Uncomment the next line to use the linear scaling of the bounds and starting points
+        if self.scalingStrategy == "linear":
+            self.weights = np.array([0.131, 89.271, 0.0852, 1365.0])
+            self.startingpoints = np.divide(self.startingpoints, self.weights)
+            self.lowerBound = np.divide(self.lowerBound, self.weights)
+            self.upperBound = np.divide(self.upperBound, self.weights)
+            
             
 
         

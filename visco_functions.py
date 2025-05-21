@@ -25,7 +25,7 @@ pf = pipeline_settings()
 
 
 
-def get_load_data(t_16_file, cbody_name) -> array:
+def get_load_data(t_16_file, cbody_name) -> tuple:
     '''
     This function returns the specified contact body displacement with each time increment
     '''
@@ -258,7 +258,10 @@ def log_iteration(params, obj, g):
     save_name = 'iterations.txt'
 
     # Change params back into base 10 from log
-    params = np.power(10, params)
+    if pf.scalingStrategy == 'log':
+        params = np.power(10, params)
+    if pf.scalingStrategy == 'linear':
+        params = np.multiply(params, pf.weights)
 
     data = list(params) + [obj] + list(g)
 
@@ -281,7 +284,10 @@ def log_iteration(params, obj, g):
     f.close()
 
     # Make params back into log space
-    params = np.log10(params)
+    if pf.scalingStrategy == 'log':
+        params = np.log10(params)
+    if pf.scalingStrategy == 'linear':
+        params = np.divide(params, pf.weights)
 
 
 def myEvaluate_dot(x, obj, g, param) -> None:
