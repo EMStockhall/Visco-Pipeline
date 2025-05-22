@@ -56,7 +56,7 @@ class pipeline_settings:
         # DOT Settings
         self.optimiser_type = "MMFD"
         self.maxdotIterations = 300
-        self.nCons = 1
+        self.nCons = 1 + 2*(self.pronyTerms - 1) # The number of constraints to use in the DOT algorithm
         self.FDCH = 0.005
         self.FDCHM = 0.0005
         dotlowerBound = 0.000001

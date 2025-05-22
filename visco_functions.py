@@ -311,7 +311,7 @@ def myEvaluate_dot(x, obj, g, param) -> None:
     print("Submitting FEM simulation with parameters: ", x)
 
     os.chdir(fem_folder)
-    os.system("run_marc -j %s -dir %s -sdir %s -nts 8 -nte 8"%(fem_dat, os.getcwd(), os.getcwd()))
+    # os.system("run_marc -j %s -dir %s -sdir %s -nts 8 -nte 8"%(fem_dat, os.getcwd(), os.getcwd()))
     os.chdir(home_direct)
 
     time.sleep(2)
@@ -327,6 +327,19 @@ def myEvaluate_dot(x, obj, g, param) -> None:
         obj.value = calcError()
         print("FEM simulation completed successfully")
     
+    # Creating arrays for ease of use
+    GTerms = np.zeros((pf.pronyTerms , 1))
+    TTerms = np.zeros((pf.pronyTerms , 1))
+    # Split the x array into G and T terms
+    for i in range(0, pf.pronyTerms):
+        GTerms[i] = x[i*2]
+        TTerms[i] = x[i*2 + 1]
+    
+    # Check and update constraints
+    for i in range(1, pf.pronyTerms):
+        g[i] = GTerms[i] - GTerms[i-1]
+    for i in range(0, pf.pronyTerms - 1):
+        g[i + pf.pronyTerms] = 5*TTerms[i] - TTerms[i+1]
     # Make x back into log space
     if pf.scalingStrategy == 'log':
         x = np.log10(x)
