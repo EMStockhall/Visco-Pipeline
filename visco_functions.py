@@ -298,8 +298,10 @@ def myEvaluate_dot(x, obj, g, param) -> None:
     # Change params back into base 10 from log
     if pf.scalingStrategy == 'log':
         x = np.power(10, x)
+        strtpnts = np.power(10, pf.startingpoints)
     if pf.scalingStrategy == 'linear':
         x = np.multiply(x, pf.weights)
+        strtpnts = np.multiply(pf.startingpoints, pf.weights)
     time_before = time.time()
 
     home_direct = os.getcwd()
@@ -311,7 +313,7 @@ def myEvaluate_dot(x, obj, g, param) -> None:
     print("Submitting FEM simulation with parameters: ", x)
 
     os.chdir(fem_folder)
-    # os.system("run_marc -j %s -dir %s -sdir %s -nts 8 -nte 8"%(fem_dat, os.getcwd(), os.getcwd()))
+    os.system("run_marc -j %s -dir %s -sdir %s -nts 8 -nte 8"%(fem_dat, os.getcwd(), os.getcwd()))
     os.chdir(home_direct)
 
     time.sleep(2)
@@ -337,9 +339,12 @@ def myEvaluate_dot(x, obj, g, param) -> None:
     
     # Check and update constraints
     for i in range(1, pf.pronyTerms):
-        g[i] = GTerms[i] - GTerms[i-1]
+        g[i] = GTerms[i] - 0.9*GTerms[i-1]
     for i in range(0, pf.pronyTerms - 1):
-        g[i + pf.pronyTerms] = 5*TTerms[i] - TTerms[i+1]
+        g[i + pf.pronyTerms] = (5*TTerms[i] - TTerms[i+1]) / np.max(strtpnts)
+    
+    print("Constraints: ", list(g))
+    print(np.max(pf.startingpoints))
     # Make x back into log space
     if pf.scalingStrategy == 'log':
         x = np.log10(x)
