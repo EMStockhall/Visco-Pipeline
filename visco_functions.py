@@ -343,8 +343,6 @@ def myEvaluate_dot(x, obj, g, param) -> None:
     for i in range(0, pf.pronyTerms - 1):
         g[i + pf.pronyTerms] = (5*TTerms[i] - TTerms[i+1]) / np.max(strtpnts)
     
-    print("Constraints: ", list(g))
-    print(np.max(pf.startingpoints))
     # Make x back into log space
     if pf.scalingStrategy == 'log':
         x = np.log10(x)

@@ -54,7 +54,7 @@ class pipeline_settings:
         self.error_method = "RMSE" # The error method to use, can be "RMSE" or "MAE"
 
         # DOT Settings
-        self.optimiser_type = "MMFD"
+        self.optimiser_type = "SQP" # The type of optimiser to use, can be "MMFD", "SLP" or "SQP"
         self.maxdotIterations = 300
         self.nCons = 1 + 2*(self.pronyTerms - 1) # The number of constraints to use in the DOT algorithm
         self.FDCH = 0.005
