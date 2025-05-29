@@ -302,6 +302,14 @@ def myEvaluate_dot(x, obj, g, param) -> None:
     if pf.scalingStrategy == 'linear':
         x = np.multiply(x, pf.weights)
         strtpnts = np.multiply(pf.startingpoints, pf.weights)
+    if pf.scalingStrategy == 'linln':
+        strtpnts = pf.startingpoints.copy()
+        for i in range(pf.pronyTerms):
+                x[i*2] = np.multiply(x[i*2], pf.weights[i*2])
+                x[i*2 + 1] = np.exp(x[i*2 + 1])
+                strtpnts[i*2] = np.multiply(strtpnts[i*2], pf.weights[i*2])
+                strtpnts[i*2 + 1] = np.exp(strtpnts[i*2 + 1])
+            
     time_before = time.time()
 
     home_direct = os.getcwd()
@@ -310,7 +318,7 @@ def myEvaluate_dot(x, obj, g, param) -> None:
 
     modify_prony_series(fem_dat, pf.pronyTerms, x)
 
-    print("Submitting FEM simulation with parameters: ", x)
+    print("Submitting FEM simulation with parameters: ", list(x))
 
     os.chdir(fem_folder)
     os.system("run_marc -j %s -dir %s -sdir %s -nts 8 -nte 8"%(fem_dat, os.getcwd(), os.getcwd()))
@@ -348,6 +356,10 @@ def myEvaluate_dot(x, obj, g, param) -> None:
         x = np.log10(x)
     if pf.scalingStrategy == 'linear':
         x = np.divide(x, pf.weights)
+    if pf.scalingStrategy == 'linln':
+        for i in range(pf.pronyTerms):
+                x[i*2] = np.divide(x[i*2], pf.weights[i*2])
+                x[i*2 + 1] = np.log(x[i*2 + 1])
     
     print("Begining DOT iteration")
     print("Objective function value: ", obj.value)

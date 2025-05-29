@@ -54,7 +54,7 @@ class pipeline_settings:
         self.error_method = "RMSE" # The error method to use, can be "RMSE" or "MAE"
 
         # DOT Settings
-        self.optimiser_type = "SQP" # The type of optimiser to use, can be "MMFD", "SLP" or "SQP"
+        self.optimiser_type = "MMFD" # The type of optimiser to use, can be "MMFD", "SLP" or "SQP"
         self.maxdotIterations = 300
         self.nCons = 1 + 2*(self.pronyTerms - 1) # The number of constraints to use in the DOT algorithm
         self.FDCH = 0.005
@@ -69,7 +69,7 @@ class pipeline_settings:
             self.upperBound[i*2] = upperBound1
             self.upperBound[i*2 + 1] = upperBound2
         self.upperBound = self.upperBound.flatten()
-        self.scalingStrategy = "linear" # The scaling strategy to use, can be "linear" or "log"
+        self.scalingStrategy = "linln" # The scaling strategy to use, can be "linear" or "log" or "linln"
 
 
         
@@ -88,7 +88,17 @@ class pipeline_settings:
             self.startingpoints = np.divide(self.startingpoints, self.weights)
             self.lowerBound = np.divide(self.lowerBound, self.weights)
             self.upperBound = np.divide(self.upperBound, self.weights)
-            
+        
+        if self.scalingStrategy == "linln":
+            self.weights = np.array([0.131, 89.271, 0.0852, 1365.0])
+            for i in range(self.pronyTerms):
+                self.lowerBound[i*2] = np.divide(self.lowerBound[i*2], self.weights[i*2])
+                self.lowerBound[i*2 + 1] = np.log(self.lowerBound[i*2 + 1])
+                self.upperBound[i*2] = np.divide(self.upperBound[i*2], self.weights[i*2])
+                self.upperBound[i*2 + 1] = np.log(self.upperBound[i*2 + 1])
+
+                self.startingpoints[i*2] = np.divide(self.startingpoints[i*2], self.weights[i*2])
+                self.startingpoints[i*2 + 1] = np.log(self.startingpoints[i*2 + 1])
             
 
         
