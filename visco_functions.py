@@ -262,6 +262,10 @@ def log_iteration(params, obj, g):
         params = np.power(10, params)
     if pf.scalingStrategy == 'linear':
         params = np.multiply(params, pf.weights)
+    if pf.scalingStrategy == 'linln':
+        for i in range(pf.pronyTerms):
+                params[i*2] = np.multiply(params[i*2], pf.weights[i*2])
+                params[i*2 + 1] = np.exp(params[i*2 + 1])
 
     data = list(params) + [obj] + list(g)
 
@@ -288,6 +292,10 @@ def log_iteration(params, obj, g):
         params = np.log10(params)
     if pf.scalingStrategy == 'linear':
         params = np.divide(params, pf.weights)
+    if pf.scalingStrategy == 'linln':
+        for i in range(pf.pronyTerms):
+                params[i*2] = np.divide(params[i*2], pf.weights[i*2])
+                params[i*2 + 1] = np.log(params[i*2 + 1])
 
 
 def myEvaluate_dot(x, obj, g, param) -> None:
