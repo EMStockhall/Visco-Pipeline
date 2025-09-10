@@ -25,16 +25,16 @@ class pipeline_settings:
         self.expfile = "v_viscPipe_ring.txt" # Numpy file containing the experimental data
 
         # FEM Parameters
-        self.maxFemInc = 41 # The increment at which the max force ocurrs in the FEM simulation
+        self.maxFemInc = 21 # The increment at which the max force ocurrs in the FEM simulation
         self.indName = "ringGrip" # The name of the indenter/pulley in the FEM Sim
         self.forceMul = 4 # The force multiplier for the FEM simulation (IE, was it quater or 8th symetry and the force needs to be multiplied by 4 or 8 etc)
         self.flipFemForce = True # If True, the force is flipped in the FEM simulation (IE, if the force is negative, it is flipped to positive)
         self.pronyTerms = 2 # The number of prony terms to use in the FEM simulation
-        self.startingpoints = np.array([0.09, 40.271, 0.05, 1800.0])
+        self.startingpoints = np.array([0.005, 1.954, 0.003488, 700.0])
 
 
         # Experimental Parameters
-        self.maxExpForce = 41 # The time incremement at which the max force ocurrs in the experimental data
+        self.maxExpForce = 100 # The time incremement at which the max force ocurrs in the experimental data
 
         # Other Settings
         self.normData = True # Normalise the force data for both datasets, if False, the self.normDataFem and self.normDataExp should just be set to None
@@ -50,7 +50,7 @@ class pipeline_settings:
         # Sampling Strategy
         self.sampleStrat = "linlog" # The sampling strategy to use, can be "linear" or "log" NBNBNBNBNBNBNBNBNB ADD MORE STRATEGIES IE LINEAR AND LOG!!!!!!! SHOULD HELP WITH BIAS IN THE FRONT AND BACK
         self.samplePoints = 10000 # The number of points along the curve to sample
-        self.sampleTime = 3600 # The time to sample the data over, in seconds
+        self.sampleTime = 1800 # The time to sample the data over, in seconds
         self.error_method = "RMSE" # The error method to use, can be "RMSE" or "MAE"
 
         # DOT Settings
