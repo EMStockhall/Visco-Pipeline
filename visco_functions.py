@@ -219,7 +219,7 @@ def calcError() -> float:
     
 
     # Get the load history from the experimental data
-    exp_data = pd.read_csv(exp_file, sep='\t', header=None).to_numpy()
+    exp_data = pd.read_csv(exp_file, sep=',', header=None).to_numpy()
     exp_time = exp_data[:,0]
     exp_load = exp_data[:,1]
 
