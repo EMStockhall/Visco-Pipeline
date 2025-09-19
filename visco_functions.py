@@ -353,11 +353,11 @@ def myEvaluate_dot(x, obj, g, param) -> None:
         GTerms[i] = x[i*2]
         TTerms[i] = x[i*2 + 1]
     
-    # Check and update constraints
-    for i in range(1, pf.pronyTerms):
-        g[i] = GTerms[i] - 0.9*GTerms[i-1]
-    for i in range(0, pf.pronyTerms - 1):
-        g[i + pf.pronyTerms] = (5*TTerms[i] - TTerms[i+1]) / np.max(strtpnts)
+    # # Check and update constraints
+    # for i in range(1, pf.pronyTerms):
+    #     g[i] = GTerms[i] - 0.9*GTerms[i-1]
+    # for i in range(0, pf.pronyTerms - 1):
+    #     g[i + pf.pronyTerms] = (5*TTerms[i] - TTerms[i+1]) / np.max(strtpnts)
     
     # Make x back into log space
     if pf.scalingStrategy == 'log':
