@@ -47,6 +47,9 @@ class pipeline_settings:
         self.useWholeLoadStartFem = None # The start point of the whole load history in the FEM simulation
         self.useWholeLoadStartExp = None
 
+        self.JWRITE = 21     # File number to write iteration history to.
+        self.IWRITE = 20     # File number for printed output
+
         # Sampling Strategy
         self.sampleStrat = "linlog" # The sampling strategy to use, can be "linear" or "log" NBNBNBNBNBNBNBNBNB ADD MORE STRATEGIES IE LINEAR AND LOG!!!!!!! SHOULD HELP WITH BIAS IN THE FRONT AND BACK
         self.samplePoints = 10000 # The number of points along the curve to sample

@@ -28,8 +28,8 @@ aDot.nmRPRM[9] = pf.FDCHM
 
 #IPRM
 aDot.nmIPRM[2] = pf.maxdotIterations
-#aDot.nmIPRM[4] = pf.IWRITE
-#aDot.nmIPRM[12] = pf.JWRITE
+aDot.nmIPRM[4] = pf.IWRITE
+aDot.nmIPRM[12] = pf.JWRITE
 
 x = pf.startingpoints.copy()   # First starting point in list
 xl = pf.lowerBound.copy()   # Lower bound (lower side constraint)
