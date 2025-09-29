@@ -229,6 +229,9 @@ def calcError() -> float:
         fem_time = fem_time[pf.useWholeLoadStartFem:]
         fem_time = fem_time - fem_time[0]
         fem_load = fem_load[pf.useWholeLoadStartFem:]
+        exp_time = exp_time[pf.useWholeLoadStartExp:]
+        exp_time = exp_time - exp_time[0]
+        exp_load = exp_load[pf.useWholeLoadStartExp:]
 
     else:
         fem_time = fem_time[pf.maxFemInc:]
@@ -240,9 +243,9 @@ def calcError() -> float:
 
     # Normalize the data
     if pf.normData == True:
-        fem_load = fem_load / np.max(fem_load)
-        exp_load = exp_load / np.max(exp_load)
-    
+        fem_load = fem_load / fem_load[pf.maxFemInc]
+        exp_load = exp_load / exp_load[pf.maxExpForce]
+
     # Interpolate the data to match the time points
     xsample = sample_x(0, pf.sampleTime, pf.samplePoints, strat = pf.sampleStrat)
     fem_interp = sc.interpolate.CubicSpline(fem_time, fem_load)
