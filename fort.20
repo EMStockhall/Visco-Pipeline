@@ -1,0 +1,94 @@
+
+
+
+
+
+
+
+                  DDDDD        OOOOO       TTTTTTT
+                  D    D      O     O         T
+                  D    D  ==  O  *  O  ==     T
+                  D    D      O     O         T
+                  DDDDD        OOOOO          T
+
+
+                     DESIGN OPTIMIZATION TOOLS
+
+
+
+                       (C) COPYRIGHT, 2010
+
+                         VANDERPLAATS R&D
+
+                  ALL RIGHTS RESERVED, WORLDWIDE
+
+                           VERSION 6.0
+
+
+
+  CONTROL PARAMETERS
+
+  OPTIMIZATION METHOD,                METHOD =       1
+  NUMBER OF DECISION VARIABLES,          NDV =      10
+  NUMBER OF CONSTRAINTS,                NCON =       1
+  PRINT CONTROL PARAMETER,            IPRINT =       5
+  GRADIENT PARAMETER,                  IGRAD =       0
+    FORWARD DIFFERENCE GRADIENTS ARE CALCULATED BY DOT
+  THE OBJECTIVE FUNCTION WILL BE MINIMIZED
+
+
+  -- SCALAR PROGRAM PARAMETERS
+
+  REAL PARAMETERS
+    1) CT     = -3.00000E-02            9) FDCH   =  5.00000E-03
+    2) CTMIN  =  3.00000E-03           10) FDCHM  =  5.00000E-04
+    3) DABOBJ =  3.22140E+00           11) RMVLMZ =  5.00000E-01
+    4) DELOBJ =  1.00000E-03           12) DABSTR =  3.22140E+00
+    5) DOBJ1  =  1.00000E-01           13) DELSTR =  1.00000E-03
+    6) DOBJ2  =  6.44280E+03           14) GSTOL  =  2.50000E-01
+    7) DX1    =  1.00000E-02           15) GSTOLM =  1.00000E-04
+    8) DX2    =  1.50688E+00           16) GSTOLS =  2.50000E-01
+
+  INTEGER PARAMETERS
+    1) IGRAD  =      0    6) NGMAX  =      1   11) NONE   =      0
+    2) ISCAL  =     10    7) IGMAX  =      1   12) NONE   =      0
+    3) ITMAX  =    300    8) JTMAX  =    100   13) JWRITE =     21
+    4) ITRMOP =      2    9) ITRMST =      2   14) NONE   =      0
+    5) IWRITE =     20   10) JPRINT =      0   15) NSTORE =      178
+
+
+     STORAGE REQUIREMENTS
+  ARRAY  DIMENSION    MINIMUM    MAXIMUM      USED
+    WK        396        396        396        396
+   IWK        123        123
+
+
+  -- INITIAL VARIABLES AND BOUNDS
+
+  LOWER BOUNDS ON THE DECISION VARIABLES (XL-VECTOR)
+       1)   4.04958E-06  -1.38155E+01   5.56174E-05  -1.38155E+01   1.49142E-04
+       6)  -1.38155E+01   1.74246E-04  -1.38155E+01   8.17996E-05  -1.38155E+01
+
+  DECISION VARIABLES (X-VECTOR)
+       1)   1.00000E+00  -1.25921E+00   1.00000E+00   1.51424E+00   1.00000E+00
+       6)   3.31237E+00   1.00000E+00   5.05169E+00   1.00000E+00   7.53440E+00
+
+  UPPER BOUNDS ON THE DECISION VARIABLES (XU-VECTOR)
+       1)   4.04958E+00   1.61181E+01   5.56173E+01   1.61181E+01   1.49142E+02
+       6)   1.61181E+01   1.74246E+02   1.61181E+01   8.17995E+01   1.61181E+01
+
+
+  -- INITIAL FUNCTION VALUES
+
+  OBJ =   32214.    
+
+  CONSTRAINT VALUES (G-VECTOR)
+       1)  -1.00000E+00
+
+  GMAX = -1.0000E+00  JGMAX =         1
+
+
+  -- BEGIN CONSTRAINED OPTIMIZATION: MODIFIED METHOD OF FEASIBLE DIRECTIONS
+
+
+  -- ITERATION NUMBER    1

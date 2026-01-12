@@ -29,8 +29,8 @@ class pipeline_settings:
         self.indName = "pull" # The name of the indenter/pulley in the FEM Sim
         self.forceMul = 4 # The force multiplier for the FEM simulation (IE, was it quater or 8th symetry and the force needs to be multiplied by 4 or 8 etc)
         self.flipFemForce = True # If True, the force is flipped in the FEM simulation (IE, if the force is negative, it is flipped to positive)
-        self.pronyTerms = 3 # The number of prony terms to use in the FEM simulation
-        self.startingpoints = np.array([0.013117, 137.91, 0.033311, 2.5865, 0.150813, 28270.41])
+        self.pronyTerms = 5 # The number of prony terms to use in the FEM simulation
+        self.startingpoints = np.array([0.246939, 0.283878, 0.01798, 4.545960, 0.006705, 27.450026, 0.005739, 156.286223, 0.012225, 1871.323787])
 
 
         # Experimental Parameters
@@ -87,13 +87,13 @@ class pipeline_settings:
 
         # Uncomment the next line to use the linear scaling of the bounds and starting points
         if self.scalingStrategy == "linear":
-            self.weights = np.array([0.013117, 137.91, 0.033311, 2.5865, 0.150813, 28270.41])
+            self.weights = np.array([0.246939, 0.283878, 0.01798, 4.545960, 0.006705, 27.450026, 0.005739, 156.286223, 0.012225, 1871.323787])
             self.startingpoints = np.divide(self.startingpoints, self.weights)
             self.lowerBound = np.divide(self.lowerBound, self.weights)
             self.upperBound = np.divide(self.upperBound, self.weights)
         
         if self.scalingStrategy == "linln":
-            self.weights = np.array([0.013117, 137.91, 0.033311, 2.5865, 0.150813, 28270.41])
+            self.weights = np.array([0.246939, 0.283878, 0.01798, 4.545960, 0.006705, 27.450026, 0.005739, 156.286223, 0.012225, 1871.323787])
             for i in range(self.pronyTerms):
                 self.lowerBound[i*2] = np.divide(self.lowerBound[i*2], self.weights[i*2])
                 self.lowerBound[i*2 + 1] = np.log(self.lowerBound[i*2 + 1])
