@@ -21,12 +21,12 @@ class pipeline_settings:
         # Initialize settings
 
         # File Names
-        self.datfile = "v_viscPipe_ring" # DAT file name for MARC Input
-        self.expfile = "v_viscPipe_ring.txt" # Numpy file containing the experimental data
+        self.datfile = "dogbone" # DAT file name for MARC Input
+        self.expfile = "dogbone.txt" # Numpy file containing the experimental data
 
         # FEM Parameters
         self.maxFemInc = 22 # The increment at which the max force ocurrs in the FEM simulation
-        self.indName = "ringGrip" # The name of the indenter/pulley in the FEM Sim
+        self.indName = "pull" # The name of the indenter/pulley in the FEM Sim
         self.forceMul = 4 # The force multiplier for the FEM simulation (IE, was it quater or 8th symetry and the force needs to be multiplied by 4 or 8 etc)
         self.flipFemForce = True # If True, the force is flipped in the FEM simulation (IE, if the force is negative, it is flipped to positive)
         self.pronyTerms = 3 # The number of prony terms to use in the FEM simulation

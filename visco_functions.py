@@ -77,7 +77,7 @@ def sample_x(start, end, n, strat = "log") -> array:
     elif strat == 'linlog':
         x_sample = np.concatenate((lin_sample(start, end, n), log_sample(start, end, n)), axis=None)
     elif strat == 'linlin':
-        x_sample = np.concatenate((lin_sample(start, end/100, n/2), lin_sample(start, end, n)), axis=None)
+        x_sample = np.concatenate((lin_sample(start, end/100, n/2), lin_sample(end/100, end, n/2)), axis=None)
     else:
         raise ValueError("Sampling strategy not recognised")
     
