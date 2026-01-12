@@ -225,6 +225,10 @@ def calcError() -> float:
     exp_time = exp_data[:,0]
     exp_load = exp_data[:,1]
 
+    # Normalize the data
+    if pf.normData == True:
+        fem_load = fem_load / fem_load[pf.maxFemInc]
+        exp_load = exp_load / exp_load[pf.maxExpForce]
 
     # Adjust the timing in the fem data to match the experimental data
     if pf.useWholeLoad == True:
@@ -243,10 +247,7 @@ def calcError() -> float:
         exp_time = exp_time - exp_time[0]
         exp_load = exp_load[pf.maxExpForce:]
 
-    # Normalize the data
-    if pf.normData == True:
-        fem_load = fem_load / fem_load[pf.maxFemInc]
-        exp_load = exp_load / exp_load[pf.maxExpForce]
+    
 
     # Interpolate the data to match the time points
     xsample = sample_x(0, pf.sampleTime, pf.samplePoints, strat = pf.sampleStrat)
@@ -357,12 +358,6 @@ def myEvaluate_dot(x, obj, g, param) -> None:
     for i in range(0, pf.pronyTerms):
         GTerms[i] = x[i*2]
         TTerms[i] = x[i*2 + 1]
-    
-    # # Check and update constraints
-    # for i in range(1, pf.pronyTerms):
-    #     g[i] = GTerms[i] - 0.9*GTerms[i-1]
-    # for i in range(0, pf.pronyTerms - 1):
-    #     g[i + pf.pronyTerms] = (5*TTerms[i] - TTerms[i+1]) / np.max(strtpnts)
     
     # Make x back into log space
     if pf.scalingStrategy == 'log':
