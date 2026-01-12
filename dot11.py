@@ -114,20 +114,19 @@ class dot:
             else :
                 raise ValueError( 'Unsupported Operating System: '+self.systemName )
             if ( INFO.value == 0 ) :
+                log_iteration(X, OBJ.value, G)
                 break
             else:
                 self.evaluate(X, OBJ, G, self.nmParam)
                 log_iteration(X, OBJ.value, G)
 
 
-        # # Process the DOT output into a return value array
-        # rslt = np.empty( 2+nDvar, float)
-        # rslt[0] = OBJ.value
-        # rslt[1] = 0.0
-        # if len(G) > 0 :
-        #     rslt[1] = max(G)
-        # for i in range( nDvar ):
-        #     rslt[2+i] = X[i]
-        # return rslt
+        # Process the DOT output into a return value array
+        rslt = np.empty( 2+nDvar, float)
+        rslt[0] = OBJ.value
+        rslt[1] = 0.0
+        for i in range( nDvar ):
+            rslt[2+i] = X[i]
+        return rslt
 
     # ---------------------------------------------------------
