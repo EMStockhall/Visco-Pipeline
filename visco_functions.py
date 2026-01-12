@@ -138,11 +138,13 @@ def modify_prony_series(dat_file, n_terms, prony_terms):
         if 'mat color' in lines[i]:
             end = i + 1
             break
-    
-    lines[start:end] = wlines
+    toplines = lines[0:start]
+    bottomlines = lines[end:]
+    newlines = toplines + wlines + bottomlines
+    # lines[start:end] = wlines
 
     with open(dat_file, 'w') as f:
-        for line in lines:
+        for line in newlines:
             f.write(line)
         f.close()
 
